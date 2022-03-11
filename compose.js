@@ -66,7 +66,7 @@ class Compose {
     for (var serviceName of serviceNames) {
       var service = this.recipe.services[serviceName];
       try {
-        var streami = await this.docker.pull(service.image);
+        var streami = await this.docker.pull(service.image, options);
         streams.push(streami);
 
         if (options.verbose === true) {
