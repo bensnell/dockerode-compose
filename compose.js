@@ -70,12 +70,22 @@ class Compose {
         streams.push(streami);
 
         if (options.verbose === true) {
-          streami.pipe(process.stdout);
+          if (!options.onData && !options.onError) {
+            streami.pipe(process.stdout);
+          } else {
+            if (options.onData) streami.on('data', options.onData);
+            if (options.onError) streami.on('error', options.onError);
+          }
         }
 
         if (options.streams !== true) {
           if (options.verbose === true) {
-            streami.pipe(process.stdout);
+            if (!options.onData && !options.onError) {
+              streami.pipe(process.stdout);
+            } else {
+              if (options.onData) streami.on('data', options.onData);
+              if (options.onError) streami.on('error', options.onError);
+            }
           } else {
             streami.pipe(stream.PassThrough());
           }
