@@ -79,14 +79,7 @@ class Compose {
         }
 
         if (options.streams !== true) {
-          if (options.verbose === true) {
-            if (!options.onData && !options.onError) {
-              streami.pipe(process.stdout);
-            } else {
-              if (options.onData) streami.on('data', options.onData);
-              if (options.onError) streami.on('error', options.onError);
-            }
-          } else {
+          if (options.verbose !== true) {
             streami.pipe(stream.PassThrough());
           }
           await new Promise(fulfill => streami.once('end', fulfill));
